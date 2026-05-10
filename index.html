@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Discipline Coaching for Dads</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0D0C0A;
+  --dark: #141210;
+  --coal: #1E1B17;
+  --orange: #E8500A;
+  --orange-dim: #B83D06;
+  --off-white: #EDE8E0;
+  --grey: #6B6560;
+  --mid: #3A3630;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--off-white);
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  background: rgba(13,12,10,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--mid);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  color: var(--off-white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--orange); }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: var(--orange);
+  color: var(--off-white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--orange-dim); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: -0.03em;
+  transform: translateY(-54%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(160px, 28vw, 360px);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232,80,10,0.12);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 0 64px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--orange);
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 12vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0 64px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+h1 .line-orange { color: var(--orange); display: block; }
+h1 .line-stroke {
+  -webkit-text-stroke: 2px var(--off-white);
+  color: transparent;
+  display: block;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 64px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.4s forwards;
+}
+
+.hero-desc {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: rgba(237,232,224,0.6);
+  max-width: 420px;
+  line-height: 1.65;
+}
+.hero-desc strong { color: var(--off-white); font-weight: 600; }
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: var(--orange);
+  color: var(--off-white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--orange-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(232,80,10,0.3);
+}
+
+.trust-note {
+  font-size: 0.78rem;
+  color: var(--grey);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* TICKER */
+.ticker {
+  background: var(--orange);
+  overflow: hidden;
+  padding: 14px 0;
+  white-space: nowrap;
+  border-top: 2px solid var(--orange-dim);
+  border-bottom: 2px solid var(--orange-dim);
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 22s linear infinite;
+}
+.ticker-item {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: var(--off-white);
+  padding: 0 48px;
+}
+.ticker-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 48px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SECTIONS */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--orange);
+}
+
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  margin-bottom: 32px;
+}
+h2 .orange { color: var(--orange); }
+
+/* FOR YOU */
+.for-you-section {
+  padding: 100px 64px;
+  border-bottom: 1px solid var(--mid);
+}
+.for-you-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.for-you-body {
+  font-size: 1.1rem;
+  color: rgba(237,232,224,0.65);
+  line-height: 1.75;
+  font-weight: 400;
+}
+.for-you-body strong { color: var(--off-white); font-weight: 600; }
+
+.pain-points { display: flex; flex-direction: column; }
+
+.pain-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--mid);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.pain-item.visible { opacity: 1; transform: none; }
+.pain-item:first-child { border-top: 1px solid var(--mid); }
+.pain-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--orange); min-width: 28px; }
+
+/* HOW */
+.how {
+  background: var(--coal);
+  border-top: 1px solid var(--mid);
+  border-bottom: 1px solid var(--mid);
+  padding: 100px 64px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.step-card {
+  background: var(--dark);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--mid);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.step-card.visible { opacity: 1; transform: none; }
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.step-card:hover::before { transform: scaleX(1); }
+
+.step-big-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  color: rgba(232,80,10,0.12);
+  line-height: 1;
+  position: absolute;
+  top: 16px; right: 20px;
+}
+
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--off-white);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  position: relative;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--grey);
+  line-height: 1.65;
+  position: relative;
+}
+
+/* INCLUDED */
+.included-section {
+  padding: 100px 64px;
+  border-bottom: 1px solid var(--mid);
+}
+
+.included-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+.included-list { list-style: none; display: flex; flex-direction: column; }
+.included-list li {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--mid);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+.included-list li.visible { opacity: 1; transform: none; }
+.included-list li:first-child { border-top: 1px solid var(--mid); }
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.quote-block {
+  background: var(--coal);
+  border: 1px solid var(--mid);
+  border-left: 4px solid var(--orange);
+  padding: 48px 40px;
+}
+.quote-text {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--off-white);
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+.quote-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* CTA */
+.cta-section {
+  background: var(--orange);
+  padding: 100px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: 'NOW';
+  position: absolute;
+  right: -0.05em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(200px, 30vw, 400px);
+  line-height: 0.85;
+  color: rgba(0,0,0,0.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cta-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 700px;
+}
+
+.cta-section h2 {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  color: var(--off-white);
+  margin-bottom: 0;
+  line-height: 0.9;
+}
+
+.cta-body {
+  font-size: 1.15rem;
+  color: rgba(237,232,224,0.8);
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 44px;
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-dark:hover { background: #1a1814; transform: translateY(-2px); }
+
+.cta-footnote {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237,232,224,0.6);
+  font-weight: 500;
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--mid);
+  padding: 32px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  color: var(--off-white);
+}
+.footer-logo span { color: var(--orange); }
+.footer-copy { font-size: 0.78rem; color: var(--grey); }
+
+/* MEET THE COACH */
+.coach-section {
+  padding: 100px 64px;
+  border-bottom: 1px solid var(--mid);
+}
+
+.coach-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 52px;
+}
+
+.coach-photo-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.coach-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--coal);
+  border: 1px solid var(--mid);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+
+/* corner accents */
+.coach-photo::before,
+.coach-photo::after {
+  content: '';
+  position: absolute;
+  width: 32px; height: 32px;
+  border-color: var(--orange);
+  border-style: solid;
+}
+.coach-photo::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+.coach-photo::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+.coach-photo-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 2px dashed var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--grey);
+  font-size: 2rem;
+}
+
+.coach-photo-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  text-align: center;
+  padding: 0 24px;
+}
+
+.coach-tag {
+  position: absolute;
+  bottom: -1px; left: -1px;
+  background: var(--orange);
+  padding: 10px 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--off-white);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.coach-content { display: flex; flex-direction: column; gap: 24px; }
+
+.coach-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--off-white);
+}
+.coach-name span { color: var(--orange); }
+
+.coach-bio {
+  font-size: 1.05rem;
+  color: rgba(237,232,224,0.65);
+  line-height: 1.75;
+  max-width: 520px;
+}
+.coach-bio strong { color: var(--off-white); font-weight: 600; }
+
+.coach-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.coach-stat {
+  background: var(--coal);
+  border: 1px solid var(--mid);
+  padding: 24px 20px;
+  text-align: center;
+}
+.coach-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.coach-stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+
+/* Tablet & large mobile (≤ 900px) */
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-logo { font-size: 1.3rem; }
+  .nav-cta { padding: 10px 18px; font-size: 0.85rem; }
+
+  /* Hero */
+  .hero { padding-bottom: 60px; }
+  h1 { padding: 0 20px; font-size: clamp(3.2rem, 13vw, 5.5rem); margin-bottom: 28px; }
+  .hero-tag { padding: 0 20px; font-size: 0.75rem; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 24px; }
+  .hero-desc { font-size: 1rem; max-width: 100%; }
+  .hero-cta-group { align-items: flex-start; width: 100%; }
+  .btn-primary { width: 100%; justify-content: center; font-size: 1.3rem; padding: 16px 28px; }
+
+  /* Sections */
+  .for-you-section,
+  .included-section,
+  .coach-section { padding: 64px 20px; }
+  .how { padding: 64px 20px; }
+  .cta-section { padding: 72px 20px; }
+
+  /* Grids → single column */
+  .for-you-grid,
+  .included-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Coach section */
+  .coach-grid { grid-template-columns: 1fr; gap: 40px; }
+  .coach-photo { aspect-ratio: 4 / 3; max-height: 340px; }
+  .coach-stats { grid-template-columns: repeat(3, 1fr); }
+
+  /* Steps: 2 cols on tablet */
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+
+  /* CTA */
+  .cta-section h2 { font-size: clamp(3rem, 10vw, 5rem); }
+  .btn-dark { width: 100%; justify-content: center; font-size: 1.3rem; padding: 18px 28px; }
+
+  footer { padding: 24px 20px; flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* Small mobile (≤ 480px) */
+@media (max-width: 480px) {
+  h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
+  h2 { font-size: clamp(2.2rem, 10vw, 3rem); margin-bottom: 20px; }
+
+  .steps-grid { grid-template-columns: 1fr; }
+
+  .coach-stats { grid-template-columns: 1fr 1fr; }
+  .coach-stat:last-child { grid-column: 1 / -1; }
+
+  .ticker-item { padding: 0 28px; font-size: 1.1rem; }
+
+  .pain-item { font-size: 1.1rem; padding: 18px 0; }
+
+  .included-list li { font-size: 1.1rem; padding: 16px 0; }
+
+  .btn-primary,
+  .btn-dark { font-size: 1.1rem; padding: 14px 20px; }
+
+  .quote-block { padding: 32px 24px; }
+  .quote-text { font-size: 1.2rem; }
+
+  .coach-bio { font-size: 0.95rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">DISCIPLINE<span>.</span></a>
+  <a href="#book" class="nav-cta">Book Free Call →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-text">DAD</div>
+  <p class="hero-tag">1-on-1 Coaching for Dads 35+</p>
+  <h1>
+    <span class="line-orange">Stop</span>
+    <span class="line-stroke">Drifting.</span>
+    Start
+    <span class="line-orange">Leading.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      You've got a family counting on you. <strong>Now it's time to get your body, discipline, and habits in order</strong> — without upending your life or chasing extremes.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#book" class="btn-primary">Book Your Free Call →</a>
+      <span class="trust-note">Free · 30 min · No commitment</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Daily Accountability</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Built Around Your Life</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-dot"></span>
+    <span class="ticker-item">No Extremes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Direct Access to Your Coach</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Daily Accountability</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Built Around Your Life</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-dot"></span>
+    <span class="ticker-item">No Extremes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-dot"></span>
+    <span class="ticker-item">Direct Access to Your Coach</span><span class="ticker-dot"></span>
+  </div>
+</div>
+
+<!-- MEET THE COACH -->
+<div class="coach-section">
+  <div class="section-label reveal">Your Coach</div>
+  <div class="coach-grid">
+
+    <div class="coach-photo-wrap reveal">
+      <div class="coach-photo">
+        <div class="coach-photo-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <p class="coach-photo-label">Add your photo here<br/>Recommended: portrait, 3:4 ratio</p>
+      </div>
+      <div class="coach-tag">Discipline Coach</div>
+    </div>
+
+    <div class="coach-content reveal">
+      <div class="coach-name">Your<br/><span>Name</span><br/>Here</div>
+      <p class="coach-bio">
+        Add your story here — why you started coaching, what drove you to build this, and why you specifically work with dads. <strong>People buy from people.</strong> Let them see who you are and why you give a damn.<br/><br/>
+        Keep it real. Keep it direct. No fluff.
+      </p>
+      <div class="coach-stats">
+        <div class="coach-stat">
+          <div class="coach-stat-num">5+</div>
+          <div class="coach-stat-label">Years Coaching</div>
+        </div>
+        <div class="coach-stat">
+          <div class="coach-stat-num">200+</div>
+          <div class="coach-stat-label">Dads Coached</div>
+        </div>
+        <div class="coach-stat">
+          <div class="coach-stat-num">1:1</div>
+          <div class="coach-stat-label">Always Personal</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOR YOU -->
+<div class="for-you-section">
+  <div class="for-you-grid">
+    <div>
+      <div class="section-label reveal">Sound Familiar?</div>
+      <h2 class="reveal">You're <span class="orange">Busy.</span><br/>Not Broken.</h2>
+      <p class="for-you-body reveal">
+        Work. Kids. Life. You keep putting yourself last and wondering why you feel like a shadow of who you used to be.<br/><br/>
+        <strong>You don't need a complete overhaul.</strong> You need a structure that fits your actual life — and someone who keeps you honest.
+      </p>
+    </div>
+    <div class="pain-points">
+      <div class="pain-item"><span class="pain-num">—</span> Low energy & motivation</div>
+      <div class="pain-item"><span class="pain-num">—</span> No consistent routine</div>
+      <div class="pain-item"><span class="pain-num">—</span> Poor nutrition habits</div>
+      <div class="pain-item"><span class="pain-num">—</span> Training falls apart after week 2</div>
+      <div class="pain-item"><span class="pain-num">—</span> No time — or so you think</div>
+      <div class="pain-item"><span class="pain-num">—</span> Want to set an example for your kids</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how">
+  <div class="section-label reveal">The Process</div>
+  <h2 class="reveal">How It <span class="orange">Works</span></h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-big-num">01</div>
+      <div class="step-title">Strategy Call</div>
+      <p class="step-desc">We map your goals, lifestyle, training, and nutrition honestly. No judgement. Just clarity on where you are and where you want to be.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-big-num">02</div>
+      <div class="step-title">Your Structure</div>
+      <p class="step-desc">I build a plan around your actual life — calorie targets, simple training, one non-negotiable daily habit. Sustainable, not extreme.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-big-num">03</div>
+      <div class="step-title">Daily Check-ins</div>
+      <p class="step-desc">You send food photos daily. I give real feedback. Direct access to me — no bots, no templates. Accountability that actually holds.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-big-num">04</div>
+      <div class="step-title">Weekly Reviews</div>
+      <p class="step-desc">We track progress, adjust the plan, and keep momentum building. When life gets hard — and it will — you won't be doing it alone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INCLUDED -->
+<div class="included-section">
+  <div class="section-label reveal">What's Included</div>
+  <h2 class="reveal">Everything You <span class="orange">Need.</span><br/>Nothing You Don't.</h2>
+  <div class="included-grid">
+    <ul class="included-list">
+      <li><span class="check">✓</span> Daily accountability check-ins</li>
+      <li><span class="check">✓</span> Direct access to your coach</li>
+      <li><span class="check">✓</span> One non-negotiable daily habit</li>
+      <li><span class="check">✓</span> Nutrition guidance that fits dad life</li>
+      <li><span class="check">✓</span> Calorie & protein targets</li>
+      <li><span class="check">✓</span> Simple training structure</li>
+      <li><span class="check">✓</span> Weekly progress check-ins</li>
+      <li><span class="check">✓</span> Daily food photo feedback</li>
+      <li><span class="check">✓</span> Support when motivation drops</li>
+    </ul>
+    <div class="reveal">
+      <div class="quote-block">
+        <p class="quote-text">"The goal isn't perfection. The goal is building momentum and becoming someone disciplined long term."</p>
+        <p class="quote-sub">— Your Coach</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="book">
+  <div class="cta-inner">
+    <div class="section-label" style="color: rgba(237,232,224,0.7);">Ready? Let's Go.</div>
+    <h2>Book Your<br/>Free Call</h2>
+    <p class="cta-body">
+      We jump on a call, map it all out, and figure out if we're a fit. No pressure. No pitch. Just a straight conversation about what it's going to take.
+    </p>
+    <a href="https://cal.com" target="_blank" class="btn-dark">Book Free Strategy Call →</a>
+    <p class="cta-footnote">Free · 30 minutes · No commitment required</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DISCIPLINE<span>.</span></div>
+  <div class="footer-copy">© 2026 · All rights reserved</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const painObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.pain-item').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 100);
+      });
+      painObserver.disconnect();
+    }
+  });
+}, { threshold: 0.1 });
+const painEl = document.querySelector('.pain-points');
+if (painEl) painObserver.observe(painEl);
+
+const stepObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.step-card').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 120);
+      });
+      stepObserver.disconnect();
+    }
+  });
+}, { threshold: 0.1 });
+const stepsEl = document.querySelector('.steps-grid');
+if (stepsEl) stepObserver.observe(stepsEl);
+
+const listObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.included-list li').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 80);
+      });
+      listObserver.disconnect();
+    }
+  });
+}, { threshold: 0.1 });
+const listEl = document.querySelector('.included-list');
+if (listEl) listObserver.observe(listEl);
+</script>
+</body>
+</html>
