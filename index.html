@@ -3,20 +3,25 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Discipline Coaching for Dads</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet"/>
+<title>Discipline Coaching for Busy Dads 35+ | Book a Free Call</title>
+<meta name="description" content="1-on-1 discipline coaching built around dad life. Daily accountability, nutrition guidance, and a structure that actually sticks. Book your free strategy call today."/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --black: #0D0C0A;
-  --dark: #141210;
-  --coal: #1E1B17;
-  --orange: #E8500A;
-  --orange-dim: #B83D06;
-  --off-white: #EDE8E0;
-  --grey: #6B6560;
-  --mid: #3A3630;
+  --black:       #0D0C0A;
+  --dark:        #141210;
+  --coal:        #1C1914;
+  --coal-light:  #252118;
+  --orange:      #E8500A;
+  --orange-dim:  #B83D06;
+  --orange-glow: rgba(232,80,10,0.18);
+  --off-white:   #EDE8E0;
+  --muted:       rgba(237,232,224,0.55);
+  --grey:        #6B6560;
+  --mid:         #38332E;
+  --mid-light:   #4a4540;
 }
 
 html { scroll-behavior: smooth; }
@@ -25,962 +30,1370 @@ body {
   font-family: 'Barlow', sans-serif;
   background: var(--black);
   color: var(--off-white);
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* GRAIN OVERLAY */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
+/* GRAIN */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  pointer-events:none; z-index:9999;
+  opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px;
 }
 
-/* NAV */
+/* ── NAV ─────────────────────────── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 900;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 48px;
-  background: rgba(13,12,10,0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--mid);
+  position:fixed; top:0; left:0; right:0; z-index:800;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 52px;
+  background:rgba(13,12,10,0.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--mid);
+  transition:padding .3s;
 }
+nav.compact { padding:12px 52px; }
 
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.08em;
-  color: var(--off-white);
-  text-decoration: none;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.55rem; letter-spacing:.08em;
+  color:var(--off-white); text-decoration:none;
 }
-.nav-logo span { color: var(--orange); }
+.nav-logo span { color:var(--orange); }
+
+.nav-links {
+  display:flex; align-items:center; gap:32px;
+  list-style:none;
+}
+.nav-links a {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.82rem; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--grey); text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--off-white); }
 
 .nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
-  background: var(--orange);
-  color: var(--off-white);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: background 0.2s, transform 0.15s;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 26px;
+  background:var(--orange); color:var(--off-white);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.9rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
+  transition:background .2s, transform .15s;
 }
-.nav-cta:hover { background: var(--orange-dim); transform: translateY(-1px); }
+.nav-cta:hover { background:var(--orange-dim); transform:translateY(-1px); }
 
-/* HERO */
+.nav-hamburger {
+  display:none; flex-direction:column; gap:5px;
+  background:none; border:none; cursor:pointer; padding:4px;
+}
+.nav-hamburger span {
+  display:block; width:24px; height:2px;
+  background:var(--off-white); transition:.3s;
+}
+
+/* ── HERO ─────────────────────────── */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 0 80px;
-  position: relative;
-  overflow: hidden;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  align-items:flex-end;
+  gap:0;
+  padding-top:74px;
+  position:relative; overflow:hidden;
 }
 
-.hero-bg-text {
-  position: absolute;
-  top: 50%;
-  left: -0.03em;
-  transform: translateY(-54%);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(160px, 28vw, 360px);
-  line-height: 0.85;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(232,80,10,0.12);
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  letter-spacing: -0.01em;
+.hero-bg-word {
+  position:absolute; top:50%; left:-.02em;
+  transform:translateY(-52%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(140px,22vw,300px);
+  line-height:.85; color:transparent;
+  -webkit-text-stroke:1px rgba(232,80,10,.1);
+  pointer-events:none; user-select:none;
+  white-space:nowrap;
 }
 
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--orange);
-  padding: 0 64px;
-  margin-bottom: 24px;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.1s forwards;
+.hero-left {
+  padding:80px 56px 80px 56px;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  opacity:0; animation:fadeUp .8s .1s forwards;
 }
-.hero-tag::before {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: var(--orange);
+
+.hero-pill {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.78rem; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:22px;
+}
+.hero-pill::before {
+  content:''; display:block;
+  width:36px; height:2px; background:var(--orange);
 }
 
 h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4.5rem, 12vw, 11rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  padding: 0 64px;
-  margin-bottom: 36px;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.2s forwards;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,9vw,9.5rem);
+  line-height:.88; letter-spacing:.02em;
+  text-transform:uppercase;
+  margin-bottom:32px;
 }
-h1 .line-orange { color: var(--orange); display: block; }
-h1 .line-stroke {
-  -webkit-text-stroke: 2px var(--off-white);
-  color: transparent;
-  display: block;
+h1 .accent { color:var(--orange); }
+h1 .outline {
+  -webkit-text-stroke:2px var(--off-white);
+  color:transparent; display:block;
 }
 
-.hero-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 0 64px;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.4s forwards;
+.hero-sub {
+  font-size:1.1rem; font-weight:400;
+  color:var(--muted); max-width:440px;
+  line-height:1.7; margin-bottom:36px;
+}
+.hero-sub strong { color:var(--off-white); font-weight:600; }
+
+.hero-cta-row {
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
 }
 
-.hero-desc {
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: rgba(237,232,224,0.6);
-  max-width: 420px;
-  line-height: 1.65;
+/* Social proof strip under hero CTA */
+.hero-proof {
+  display:flex; align-items:center; gap:10px;
+  margin-top:20px;
 }
-.hero-desc strong { color: var(--off-white); font-weight: 600; }
+.hero-proof-avatars {
+  display:flex;
+}
+.avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:var(--coal-light);
+  border:2px solid var(--black);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.65rem; font-weight:700;
+  color:var(--grey); margin-left:-8px;
+}
+.avatar:first-child { margin-left:0; }
+.hero-proof-text {
+  font-size:.78rem; color:var(--grey);
+  font-weight:400; line-height:1.4;
+}
+.hero-proof-text strong { color:var(--off-white); font-weight:600; }
 
-.hero-cta-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-  flex-shrink: 0;
+/* Hero right — coach image panel */
+.hero-right {
+  height:100%;
+  min-height:560px;
+  background:var(--coal);
+  position:relative;
+  display:flex; align-items:flex-end;
+  overflow:hidden;
+  opacity:0; animation:fadeIn 1s .4s forwards;
 }
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 40px;
-  background: var(--orange);
-  color: var(--off-white);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  white-space: nowrap;
-}
-.btn-primary:hover {
-  background: var(--orange-dim);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(232,80,10,0.3);
-}
-
-.trust-note {
-  font-size: 0.78rem;
-  color: var(--grey);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 600;
+.hero-right::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(13,12,10,.7) 0%, transparent 50%);
+  z-index:2;
 }
 
-/* TICKER */
+.hero-photo-placeholder {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:14px; position:absolute; inset:0; z-index:1;
+}
+.hero-photo-icon {
+  width:80px; height:80px; border-radius:50%;
+  border:2px dashed var(--mid-light);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--grey);
+}
+.hero-photo-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem; font-weight:500; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--grey); text-align:center;
+  padding:0 20px; line-height:1.6;
+}
+
+/* orange corner marks */
+.hero-right::after {
+  content:'';
+  position:absolute; top:20px; left:20px;
+  width:32px; height:32px;
+  border-top:2px solid var(--orange);
+  border-left:2px solid var(--orange);
+  z-index:3;
+}
+
+.hero-right-badge {
+  position:relative; z-index:3;
+  padding:20px 28px 24px;
+  width:100%;
+}
+.hero-right-badge-inner {
+  background:var(--orange);
+  padding:14px 20px;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.badge-line1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem; letter-spacing:.08em;
+  color:var(--off-white); display:block;
+}
+.badge-line2 {
+  font-size:.78rem; font-weight:600;
+  color:rgba(237,232,224,.75);
+  letter-spacing:.06em; text-transform:uppercase;
+}
+
+/* ── SOCIAL PROOF BAR ──────────────── */
+.proof-bar {
+  background:var(--coal);
+  border-top:1px solid var(--mid);
+  border-bottom:1px solid var(--mid);
+  padding:28px 52px;
+  display:flex; align-items:center;
+  justify-content:space-between; gap:32px;
+  flex-wrap:wrap;
+}
+.proof-item {
+  display:flex; flex-direction:column; gap:4px;
+  opacity:0; transform:translateY(12px);
+  transition:opacity .5s, transform .5s;
+}
+.proof-item.visible { opacity:1; transform:none; }
+.proof-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.4rem; line-height:1;
+  color:var(--orange); letter-spacing:.04em;
+}
+.proof-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--grey);
+}
+.proof-divider {
+  width:1px; height:52px;
+  background:var(--mid); flex-shrink:0;
+}
+
+/* ── TICKER ─────────────────────────── */
 .ticker {
-  background: var(--orange);
-  overflow: hidden;
-  padding: 14px 0;
-  white-space: nowrap;
-  border-top: 2px solid var(--orange-dim);
-  border-bottom: 2px solid var(--orange-dim);
+  background:var(--orange); overflow:hidden;
+  padding:12px 0; white-space:nowrap;
 }
-.ticker-inner {
-  display: inline-block;
-  animation: ticker 22s linear infinite;
-}
+.ticker-inner { display:inline-block; animation:ticker 26s linear infinite; }
 .ticker-item {
-  display: inline-block;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem;
-  letter-spacing: 0.12em;
-  color: var(--off-white);
-  padding: 0 48px;
+  display:inline-block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem; letter-spacing:.12em;
+  color:var(--off-white); padding:0 44px;
 }
-.ticker-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 48px;
+.ticker-sep {
+  display:inline-block;
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(255,255,255,.35);
+  vertical-align:middle; margin-right:44px;
 }
-
 @keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
 }
 
-/* SECTIONS */
+/* ── SECTION SHARED ─────────────────── */
 .section-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:16px;
+  display:flex; align-items:center; gap:12px;
 }
 .section-label::before {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: var(--orange);
+  content:''; display:block;
+  width:24px; height:2px; background:var(--orange);
 }
 
 h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--off-white);
-  margin-bottom: 32px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,5vw,4.8rem);
+  line-height:.93; letter-spacing:.02em;
+  text-transform:uppercase; color:var(--off-white);
+  margin-bottom:28px;
 }
-h2 .orange { color: var(--orange); }
+h2 .accent { color:var(--orange); }
 
-/* FOR YOU */
-.for-you-section {
-  padding: 100px 64px;
-  border-bottom: 1px solid var(--mid);
-}
-.for-you-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+/* ── PROBLEM SECTION ────────────────── */
+.problem-section {
+  padding:96px 52px;
+  border-bottom:1px solid var(--mid);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
 }
 
-.for-you-body {
-  font-size: 1.1rem;
-  color: rgba(237,232,224,0.65);
-  line-height: 1.75;
-  font-weight: 400;
+.problem-body {
+  font-size:1.1rem; color:var(--muted);
+  line-height:1.8;
 }
-.for-you-body strong { color: var(--off-white); font-weight: 600; }
+.problem-body strong { color:var(--off-white); font-weight:600; }
 
-.pain-points { display: flex; flex-direction: column; }
-
+.pain-list { display:flex; flex-direction:column; }
 .pain-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--mid);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--off-white);
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.5s, transform 0.5s;
+  display:flex; align-items:flex-start; gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid var(--mid);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.25rem; font-weight:700;
+  letter-spacing:.04em; text-transform:uppercase;
+  color:var(--off-white);
+  opacity:0; transform:translateX(18px);
+  transition:opacity .45s, transform .45s;
 }
-.pain-item.visible { opacity: 1; transform: none; }
-.pain-item:first-child { border-top: 1px solid var(--mid); }
-.pain-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--orange); min-width: 28px; }
+.pain-item.visible { opacity:1; transform:none; }
+.pain-item:first-child { border-top:1px solid var(--mid); }
+.pain-dash { color:var(--orange); flex-shrink:0; margin-top:2px; }
 
-/* HOW */
-.how {
-  background: var(--coal);
-  border-top: 1px solid var(--mid);
-  border-bottom: 1px solid var(--mid);
-  padding: 100px 64px;
-}
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  margin-top: 60px;
-}
-
-.step-card {
-  background: var(--dark);
-  padding: 40px 32px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--mid);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.5s, transform 0.5s;
-}
-.step-card.visible { opacity: 1; transform: none; }
-.step-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--orange);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s;
-}
-.step-card:hover::before { transform: scaleX(1); }
-
-.step-big-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem;
-  color: rgba(232,80,10,0.12);
-  line-height: 1;
-  position: absolute;
-  top: 16px; right: 20px;
-}
-
-.step-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.05em;
-  color: var(--off-white);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  line-height: 1.1;
-  position: relative;
-}
-
-.step-desc {
-  font-size: 0.95rem;
-  color: var(--grey);
-  line-height: 1.65;
-  position: relative;
-}
-
-/* INCLUDED */
-.included-section {
-  padding: 100px 64px;
-  border-bottom: 1px solid var(--mid);
-}
-
-.included-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  margin-top: 60px;
-  align-items: start;
-}
-
-.included-list { list-style: none; display: flex; flex-direction: column; }
-.included-list li {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--mid);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--off-white);
-  opacity: 0;
-  transform: translateX(-16px);
-  transition: opacity 0.4s, transform 0.4s;
-}
-.included-list li.visible { opacity: 1; transform: none; }
-.included-list li:first-child { border-top: 1px solid var(--mid); }
-.check {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px; height: 28px;
-  border: 2px solid var(--orange);
-  color: var(--orange);
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-
-.quote-block {
-  background: var(--coal);
-  border: 1px solid var(--mid);
-  border-left: 4px solid var(--orange);
-  padding: 48px 40px;
-}
-.quote-text {
-  font-size: 1.4rem;
-  font-style: italic;
-  color: var(--off-white);
-  line-height: 1.55;
-  margin-bottom: 32px;
-}
-.quote-sub {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--grey);
-}
-
-/* CTA */
-.cta-section {
-  background: var(--orange);
-  padding: 100px 64px;
-  position: relative;
-  overflow: hidden;
-}
-.cta-section::before {
-  content: 'NOW';
-  position: absolute;
-  right: -0.05em;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(200px, 30vw, 400px);
-  line-height: 0.85;
-  color: rgba(0,0,0,0.12);
-  pointer-events: none;
-  user-select: none;
-}
-
-.cta-inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  max-width: 700px;
-}
-
-.cta-section h2 {
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  color: var(--off-white);
-  margin-bottom: 0;
-  line-height: 0.9;
-}
-
-.cta-body {
-  font-size: 1.15rem;
-  color: rgba(237,232,224,0.8);
-  line-height: 1.65;
-  max-width: 480px;
-}
-
-.btn-dark {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 44px;
-  background: var(--black);
-  color: var(--off-white);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  transition: background 0.2s, transform 0.15s;
-}
-.btn-dark:hover { background: #1a1814; transform: translateY(-2px); }
-
-.cta-footnote {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(237,232,224,0.6);
-  font-weight: 500;
-}
-
-/* FOOTER */
-footer {
-  background: var(--black);
-  border-top: 1px solid var(--mid);
-  padding: 32px 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.08em;
-  color: var(--off-white);
-}
-.footer-logo span { color: var(--orange); }
-.footer-copy { font-size: 0.78rem; color: var(--grey); }
-
-/* MEET THE COACH */
+/* ── COACH SECTION ──────────────────── */
 .coach-section {
-  padding: 100px 64px;
-  border-bottom: 1px solid var(--mid);
+  padding:96px 52px;
+  background:var(--coal);
+  border-bottom:1px solid var(--mid);
 }
-
 .coach-grid {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 80px;
-  align-items: center;
-  margin-top: 52px;
-}
-
-.coach-photo-wrap {
-  position: relative;
-  flex-shrink: 0;
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:72px; align-items:center;
+  margin-top:48px;
 }
 
 .coach-photo {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background: var(--coal);
-  border: 1px solid var(--mid);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  position: relative;
-  overflow: hidden;
-  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+  width:100%; aspect-ratio:3/4;
+  background:var(--coal-light);
+  border:1px solid var(--mid);
+  position:relative; overflow:hidden;
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:14px;
 }
-
-/* corner accents */
 .coach-photo::before,
 .coach-photo::after {
-  content: '';
-  position: absolute;
-  width: 32px; height: 32px;
-  border-color: var(--orange);
-  border-style: solid;
+  content:''; position:absolute;
+  width:28px; height:28px;
+  border-color:var(--orange); border-style:solid;
 }
-.coach-photo::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
-.coach-photo::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
-
+.coach-photo::before { top:14px; left:14px; border-width:2px 0 0 2px; }
+.coach-photo::after  { bottom:14px; right:14px; border-width:0 2px 2px 0; }
 .coach-photo-icon {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  border: 2px dashed var(--mid);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--grey);
-  font-size: 2rem;
+  width:64px; height:64px; border-radius:50%;
+  border:2px dashed var(--mid); color:var(--grey);
+  display:flex; align-items:center; justify-content:center;
 }
-
-.coach-photo-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--grey);
-  text-align: center;
-  padding: 0 24px;
+.coach-photo-hint {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--grey); text-align:center; padding:0 24px; line-height:1.65;
 }
-
-.coach-tag {
-  position: absolute;
-  bottom: -1px; left: -1px;
-  background: var(--orange);
-  padding: 10px 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-  color: var(--off-white);
-  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+.coach-photo-badge {
+  position:absolute; bottom:0; left:0;
+  background:var(--orange); padding:9px 18px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.95rem; letter-spacing:.08em; color:var(--off-white);
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,0 100%);
 }
-
-.coach-content { display: flex; flex-direction: column; gap: 24px; }
 
 .coach-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--off-white);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,4vw,4rem);
+  line-height:.92; letter-spacing:.03em;
+  text-transform:uppercase; color:var(--off-white);
+  margin-bottom:20px;
 }
-.coach-name span { color: var(--orange); }
+.coach-name span { color:var(--orange); }
 
 .coach-bio {
-  font-size: 1.05rem;
-  color: rgba(237,232,224,0.65);
-  line-height: 1.75;
-  max-width: 520px;
+  font-size:1rem; color:var(--muted);
+  line-height:1.8; margin-bottom:32px;
+  max-width:500px;
 }
-.coach-bio strong { color: var(--off-white); font-weight: 600; }
+.coach-bio strong { color:var(--off-white); font-weight:600; }
 
 .coach-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 8px;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.cstat {
+  background:var(--dark);
+  border:1px solid var(--mid);
+  padding:20px 16px; text-align:center;
+}
+.cstat-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem; color:var(--orange);
+  line-height:1; margin-bottom:4px;
+}
+.cstat-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--grey);
 }
 
-.coach-stat {
-  background: var(--coal);
-  border: 1px solid var(--mid);
-  padding: 24px 20px;
-  text-align: center;
+/* ── PROCESS SECTION ────────────────── */
+.process-section {
+  padding:96px 52px;
+  border-bottom:1px solid var(--mid);
 }
-.coach-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.4rem;
-  color: var(--orange);
-  line-height: 1;
-  margin-bottom: 4px;
+.steps-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:2px; margin-top:52px;
 }
-.coach-stat-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--grey);
+.step-card {
+  background:var(--coal);
+  border:1px solid var(--mid);
+  padding:36px 28px; position:relative; overflow:hidden;
+  opacity:0; transform:translateY(20px);
+  transition:opacity .5s, transform .5s;
+}
+.step-card.visible { opacity:1; transform:none; }
+.step-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:3px;
+  background:var(--orange);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .35s;
+}
+.step-card:hover::before { transform:scaleX(1); }
+.step-ghost {
+  position:absolute; top:12px; right:16px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:4.5rem; line-height:1;
+  color:rgba(232,80,10,.1);
+}
+.step-num {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:10px;
+}
+.step-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--off-white);
+  margin-bottom:10px; line-height:1.05; position:relative;
+}
+.step-desc {
+  font-size:.9rem; color:var(--grey);
+  line-height:1.65; position:relative;
 }
 
-/* ANIMATIONS */
+/* ── TESTIMONIALS ───────────────────── */
+.testimonials-section {
+  padding:96px 52px;
+  background:var(--coal);
+  border-bottom:1px solid var(--mid);
+}
+.testimonials-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:2px; margin-top:52px;
+}
+.tcard {
+  background:var(--dark);
+  border:1px solid var(--mid);
+  padding:36px 32px;
+  display:flex; flex-direction:column; gap:24px;
+  opacity:0; transform:translateY(18px);
+  transition:opacity .5s, transform .5s;
+}
+.tcard.visible { opacity:1; transform:none; }
+
+.tcard-stars {
+  display:flex; gap:4px;
+}
+.star { color:var(--orange); font-size:1rem; }
+
+.tcard-quote {
+  font-size:1rem; font-style:italic;
+  color:var(--off-white); line-height:1.7;
+  flex:1;
+}
+.tcard-quote::before { content:'\201C'; color:var(--orange); }
+.tcard-quote::after  { content:'\201D'; color:var(--orange); }
+
+.tcard-author {
+  display:flex; align-items:center; gap:14px;
+  border-top:1px solid var(--mid); padding-top:20px;
+}
+.tcard-avatar {
+  width:42px; height:42px; border-radius:50%;
+  background:var(--coal-light);
+  border:2px dashed var(--mid);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem; color:var(--orange);
+  flex-shrink:0;
+}
+.tcard-name {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.88rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--off-white);
+}
+.tcard-meta {
+  font-size:.75rem; color:var(--grey);
+  font-weight:400;
+}
+
+/* ── INCLUDED ───────────────────────── */
+.included-section {
+  padding:96px 52px;
+  border-bottom:1px solid var(--mid);
+}
+.included-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:72px; margin-top:52px; align-items:start;
+}
+.included-list { list-style:none; }
+.included-list li {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:16px 0; border-bottom:1px solid var(--mid);
+  opacity:0; transform:translateX(-14px);
+  transition:opacity .4s, transform .4s;
+}
+.included-list li.visible { opacity:1; transform:none; }
+.included-list li:first-child { border-top:1px solid var(--mid); }
+.check-box {
+  width:26px; height:26px; flex-shrink:0;
+  border:2px solid var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--orange); font-size:.75rem; margin-top:1px;
+}
+.li-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.15rem; font-weight:700;
+  letter-spacing:.04em; text-transform:uppercase;
+  color:var(--off-white); margin-bottom:2px;
+}
+.li-sub {
+  font-size:.82rem; color:var(--grey); line-height:1.5;
+}
+
+.included-aside {
+  display:flex; flex-direction:column; gap:24px;
+  position:sticky; top:100px;
+}
+.quote-block {
+  background:var(--coal);
+  border:1px solid var(--mid);
+  border-left:3px solid var(--orange);
+  padding:36px 32px;
+}
+.quote-text {
+  font-size:1.2rem; font-style:italic;
+  color:var(--off-white); line-height:1.6; margin-bottom:20px;
+}
+.quote-attribution {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--grey);
+}
+
+/* Mid-page CTA card */
+.mid-cta-card {
+  background:var(--orange);
+  padding:36px 32px;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+}
+.mid-cta-card h3 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--off-white);
+  line-height:1; margin-bottom:10px;
+}
+.mid-cta-card p {
+  font-size:.9rem; color:rgba(237,232,224,.8);
+  line-height:1.6; margin-bottom:22px;
+}
+
+/* ── FAQ ────────────────────────────── */
+.faq-section {
+  padding:96px 52px;
+  background:var(--coal);
+  border-bottom:1px solid var(--mid);
+}
+.faq-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:2px; margin-top:52px;
+}
+.faq-item {
+  background:var(--dark); border:1px solid var(--mid);
+  padding:0; cursor:pointer;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .4s, transform .4s;
+}
+.faq-item.visible { opacity:1; transform:none; }
+.faq-q {
+  display:flex; justify-content:space-between;
+  align-items:center; gap:16px;
+  padding:24px 28px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.1rem; font-weight:700;
+  letter-spacing:.03em; text-transform:uppercase;
+  color:var(--off-white); user-select:none;
+}
+.faq-icon {
+  flex-shrink:0; width:24px; height:24px;
+  border:1px solid var(--mid);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--orange); font-size:1rem;
+  transition:transform .3s;
+}
+.faq-item.open .faq-icon { transform:rotate(45deg); }
+.faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height .4s ease, padding .3s;
+  font-size:.92rem; color:var(--grey); line-height:1.75;
+}
+.faq-item.open .faq-a {
+  max-height:300px; padding:0 28px 24px;
+}
+
+/* ── FINAL CTA ──────────────────────── */
+.cta-section {
+  padding:120px 52px;
+  background:var(--black);
+  position:relative; overflow:hidden;
+}
+.cta-section::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 60% at 30% 50%, var(--orange-glow), transparent);
+  pointer-events:none;
+}
+.cta-bg-word {
+  position:absolute; right:-.02em; top:50%;
+  transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(160px,25vw,320px);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(232,80,10,.08);
+  pointer-events:none; user-select:none; line-height:.85;
+}
+
+.cta-inner {
+  position:relative; max-width:660px;
+  display:flex; flex-direction:column; gap:28px;
+}
+.cta-section h2 {
+  font-size:clamp(3rem,7vw,6.5rem);
+  line-height:.9; margin-bottom:0;
+}
+.cta-body {
+  font-size:1.05rem; color:var(--muted);
+  line-height:1.75; max-width:480px;
+}
+
+/* Objection busters row */
+.objection-row {
+  display:flex; flex-wrap:wrap; gap:12px;
+}
+.objection-chip {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 16px;
+  border:1px solid var(--mid);
+  font-size:.78rem; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  color:var(--grey);
+}
+.objection-chip .dot { color:var(--orange); font-size:1.1rem; line-height:1; }
+
+.cta-footnote {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--grey);
+}
+
+/* ── BUTTONS ────────────────────────── */
+.btn-orange {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:17px 38px;
+  background:var(--orange); color:var(--off-white);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.45rem; letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  transition:background .2s, transform .15s, box-shadow .2s;
+  white-space:nowrap;
+}
+.btn-orange:hover {
+  background:var(--orange-dim);
+  transform:translateY(-2px);
+  box-shadow:0 10px 36px rgba(232,80,10,.3);
+}
+
+.btn-dark {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:17px 38px;
+  background:var(--dark); color:var(--off-white);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.45rem; letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none; border:1px solid var(--mid); cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  transition:background .2s, border-color .2s, transform .15s;
+}
+.btn-dark:hover { background:var(--coal); border-color:var(--mid-light); transform:translateY(-1px); }
+
+.btn-small-dark {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 24px;
+  background:var(--black); color:var(--off-white);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.9rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition:background .2s;
+}
+.btn-small-dark:hover { background:#0a0906; }
+
+/* ── FOOTER ─────────────────────────── */
+footer {
+  background:var(--dark);
+  border-top:1px solid var(--mid);
+  padding:48px 52px 32px;
+}
+.footer-top {
+  display:flex; justify-content:space-between;
+  align-items:flex-start; gap:48px; flex-wrap:wrap;
+  padding-bottom:36px; border-bottom:1px solid var(--mid);
+  margin-bottom:28px;
+}
+.footer-brand {}
+.footer-logo {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem; letter-spacing:.08em;
+  color:var(--off-white); margin-bottom:10px;
+}
+.footer-logo span { color:var(--orange); }
+.footer-tagline {
+  font-size:.82rem; color:var(--grey);
+  max-width:200px; line-height:1.6;
+}
+.footer-cta-block {
+  display:flex; flex-direction:column;
+  align-items:flex-end; gap:10px;
+}
+.footer-cta-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--grey);
+}
+.footer-bottom {
+  display:flex; justify-content:space-between;
+  align-items:center; gap:20px; flex-wrap:wrap;
+}
+.footer-copy { font-size:.75rem; color:var(--grey); }
+.footer-links {
+  display:flex; gap:24px; list-style:none;
+}
+.footer-links a {
+  font-size:.75rem; color:var(--grey);
+  text-decoration:none; transition:color .2s;
+}
+.footer-links a:hover { color:var(--off-white); }
+
+/* ── ANIMATIONS ─────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
 }
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s, transform 0.7s;
+  opacity:0; transform:translateY(20px);
+  transition:opacity .65s, transform .65s;
 }
-.reveal.visible { opacity: 1; transform: none; }
+.reveal.visible { opacity:1; transform:none; }
 
-/* ── RESPONSIVE ─────────────────────────────── */
+/* ── RESPONSIVE ─────────────────────── */
+@media (max-width:1024px) {
+  .hero { grid-template-columns:1fr; min-height:auto; }
+  .hero-right { min-height:400px; }
+  .coach-grid { grid-template-columns:1fr; gap:40px; }
+  .coach-photo { aspect-ratio:16/9; max-height:320px; }
+  .testimonials-grid { grid-template-columns:1fr 1fr; }
+}
 
-/* Tablet & large mobile (≤ 900px) */
-@media (max-width: 900px) {
-  nav { padding: 16px 20px; }
-  .nav-logo { font-size: 1.3rem; }
-  .nav-cta { padding: 10px 18px; font-size: 0.85rem; }
+@media (max-width:860px) {
+  nav { padding:16px 20px; }
+  nav.compact { padding:12px 20px; }
+  .nav-links { display:none; }
+  .nav-hamburger { display:flex; }
+  .nav-links.open {
+    display:flex; flex-direction:column; gap:0;
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background:var(--black);
+    padding:80px 32px 40px;
+    z-index:799;
+    align-items:flex-start; justify-content:center;
+  }
+  .nav-links.open a { font-size:1.6rem; color:var(--off-white); padding:12px 0; }
 
-  /* Hero */
-  .hero { padding-bottom: 60px; }
-  h1 { padding: 0 20px; font-size: clamp(3.2rem, 13vw, 5.5rem); margin-bottom: 28px; }
-  .hero-tag { padding: 0 20px; font-size: 0.75rem; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 24px; }
-  .hero-desc { font-size: 1rem; max-width: 100%; }
-  .hero-cta-group { align-items: flex-start; width: 100%; }
-  .btn-primary { width: 100%; justify-content: center; font-size: 1.3rem; padding: 16px 28px; }
+  h1 { font-size:clamp(3.2rem,12vw,5.5rem); }
+  h2 { font-size:clamp(2.2rem,8vw,3.4rem); }
 
-  /* Sections */
-  .for-you-section,
+  .hero-left { padding:80px 20px 60px; }
+  .hero-right { min-height:300px; }
+
+  .proof-bar { padding:24px 20px; gap:20px; }
+  .proof-divider { display:none; }
+  .proof-num { font-size:2rem; }
+
+  .problem-section,
+  .coach-section,
+  .process-section,
+  .testimonials-section,
   .included-section,
-  .coach-section { padding: 64px 20px; }
-  .how { padding: 64px 20px; }
-  .cta-section { padding: 72px 20px; }
+  .faq-section,
+  .cta-section { padding:72px 20px; }
 
-  /* Grids → single column */
-  .for-you-grid,
-  .included-grid { grid-template-columns: 1fr; gap: 40px; }
+  .problem-section { grid-template-columns:1fr; gap:40px; }
 
-  /* Coach section */
-  .coach-grid { grid-template-columns: 1fr; gap: 40px; }
-  .coach-photo { aspect-ratio: 4 / 3; max-height: 340px; }
-  .coach-stats { grid-template-columns: repeat(3, 1fr); }
+  .steps-grid { grid-template-columns:1fr 1fr; }
+  .testimonials-grid { grid-template-columns:1fr; }
 
-  /* Steps: 2 cols on tablet */
-  .steps-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+  .included-grid { grid-template-columns:1fr; gap:40px; }
+  .included-aside { position:static; }
 
-  /* CTA */
-  .cta-section h2 { font-size: clamp(3rem, 10vw, 5rem); }
-  .btn-dark { width: 100%; justify-content: center; font-size: 1.3rem; padding: 18px 28px; }
+  .faq-grid { grid-template-columns:1fr; }
 
-  footer { padding: 24px 20px; flex-direction: column; gap: 10px; text-align: center; }
+  .cta-section h2 { font-size:clamp(2.6rem,10vw,4.5rem); }
+  .btn-orange, .btn-dark { width:100%; justify-content:center; }
+
+  footer { padding:40px 20px 24px; }
+  .footer-top { flex-direction:column; align-items:flex-start; }
+  .footer-cta-block { align-items:flex-start; }
+  .footer-bottom { flex-direction:column; align-items:flex-start; gap:12px; }
 }
 
-/* Small mobile (≤ 480px) */
-@media (max-width: 480px) {
-  h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
-  h2 { font-size: clamp(2.2rem, 10vw, 3rem); margin-bottom: 20px; }
-
-  .steps-grid { grid-template-columns: 1fr; }
-
-  .coach-stats { grid-template-columns: 1fr 1fr; }
-  .coach-stat:last-child { grid-column: 1 / -1; }
-
-  .ticker-item { padding: 0 28px; font-size: 1.1rem; }
-
-  .pain-item { font-size: 1.1rem; padding: 18px 0; }
-
-  .included-list li { font-size: 1.1rem; padding: 16px 0; }
-
-  .btn-primary,
-  .btn-dark { font-size: 1.1rem; padding: 14px 20px; }
-
-  .quote-block { padding: 32px 24px; }
-  .quote-text { font-size: 1.2rem; }
-
-  .coach-bio { font-size: 0.95rem; }
+@media (max-width:520px) {
+  h1 { font-size:clamp(2.8rem,13vw,4.5rem); }
+  .steps-grid { grid-template-columns:1fr; }
+  .coach-stats { grid-template-columns:1fr 1fr; }
+  .cstat:last-child { grid-column:1/-1; }
+  .proof-bar { flex-direction:column; align-items:flex-start; }
+  .hero-cta-row { flex-direction:column; align-items:flex-start; }
+  .btn-orange { font-size:1.2rem; }
+  .objection-row { gap:8px; }
 }
 </style>
 </head>
 <body>
 
-<nav>
+<!-- NAV -->
+<nav id="main-nav">
   <a href="#" class="nav-logo">DISCIPLINE<span>.</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">The Coach</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#proof">Results</a></li>
+    <li><a href="#faq">FAQs</a></li>
+  </ul>
   <a href="#book" class="nav-cta">Book Free Call →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ──────────────────────────────── -->
 <div class="hero">
-  <div class="hero-bg-text">DAD</div>
-  <p class="hero-tag">1-on-1 Coaching for Dads 35+</p>
-  <h1>
-    <span class="line-orange">Stop</span>
-    <span class="line-stroke">Drifting.</span>
-    Start
-    <span class="line-orange">Leading.</span>
-  </h1>
-  <div class="hero-bottom">
-    <p class="hero-desc">
-      You've got a family counting on you. <strong>Now it's time to get your body, discipline, and habits in order</strong> — without upending your life or chasing extremes.
+  <div class="hero-bg-word">DAD</div>
+
+  <div class="hero-left">
+    <p class="hero-pill">1-on-1 Coaching · Dads 35+</p>
+    <h1>
+      <span class="accent">Stop</span>
+      <span class="outline">Drifting.</span>
+      Start
+      <span class="accent">Leading.</span>
+    </h1>
+    <p class="hero-sub">
+      You've got a family counting on you. <strong>It's time to build the body, habits, and discipline you've been putting off</strong> — without blowing up your schedule or chasing extremes.
     </p>
-    <div class="hero-cta-group">
-      <a href="#book" class="btn-primary">Book Your Free Call →</a>
-      <span class="trust-note">Free · 30 min · No commitment</span>
+    <div class="hero-cta-row">
+      <a href="#book" class="btn-orange">Book Your Free Call →</a>
     </div>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Daily Accountability</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Built Around Your Life</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-dot"></span>
-    <span class="ticker-item">No Extremes</span><span class="ticker-dot"></span>
-    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Direct Access to Your Coach</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Daily Accountability</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Built Around Your Life</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-dot"></span>
-    <span class="ticker-item">No Extremes</span><span class="ticker-dot"></span>
-    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-dot"></span>
-    <span class="ticker-item">Direct Access to Your Coach</span><span class="ticker-dot"></span>
-  </div>
-</div>
-
-<!-- MEET THE COACH -->
-<div class="coach-section">
-  <div class="section-label reveal">Your Coach</div>
-  <div class="coach-grid">
-
-    <div class="coach-photo-wrap reveal">
-      <div class="coach-photo">
-        <div class="coach-photo-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-          </svg>
-        </div>
-        <p class="coach-photo-label">Add your photo here<br/>Recommended: portrait, 3:4 ratio</p>
+    <div class="hero-proof">
+      <div class="hero-proof-avatars">
+        <div class="avatar">JR</div>
+        <div class="avatar">DM</div>
+        <div class="avatar">KT</div>
+        <div class="avatar">PB</div>
       </div>
-      <div class="coach-tag">Discipline Coach</div>
+      <p class="hero-proof-text"><strong>200+ dads</strong> already building<br/>momentum. You're next.</p>
     </div>
+  </div>
 
-    <div class="coach-content reveal">
+  <div class="hero-right" id="about">
+    <div class="hero-photo-placeholder">
+      <div class="hero-photo-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <p class="hero-photo-label">Coach action photo<br/>Recommended: 3:4 portrait</p>
+    </div>
+    <div class="hero-right-badge">
+      <div class="hero-right-badge-inner">
+        <span class="badge-line1">Your Coach Name</span>
+        <span class="badge-line2">Discipline &amp; Lifestyle Coach</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SOCIAL PROOF BAR ──────────────────── -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <div class="proof-num">200+</div>
+    <div class="proof-label">Dads Coached</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">5+</div>
+    <div class="proof-label">Years Coaching</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">Daily</div>
+    <div class="proof-label">Accountability</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">1:1</div>
+    <div class="proof-label">Always Personal</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">0</div>
+    <div class="proof-label">Cookie-cutter Plans</div>
+  </div>
+</div>
+
+<!-- ── TICKER ─────────────────────────────── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Daily Accountability</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Built Around Dad Life</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-sep"></span>
+    <span class="ticker-item">No Extremes</span><span class="ticker-sep"></span>
+    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Direct Coach Access</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Build Long-Term Discipline</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Daily Accountability</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Built Around Dad Life</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Real Nutrition Guidance</span><span class="ticker-sep"></span>
+    <span class="ticker-item">No Extremes</span><span class="ticker-sep"></span>
+    <span class="ticker-item">For Dads Who Mean It</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Weekly Check-ins</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Direct Coach Access</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Build Long-Term Discipline</span><span class="ticker-sep"></span>
+  </div>
+</div>
+
+<!-- ── PROBLEM ───────────────────────────── -->
+<div class="problem-section">
+  <div>
+    <div class="section-label reveal">Sound Familiar?</div>
+    <h2 class="reveal">You're <span class="accent">Busy.</span><br/>Not Broken.</h2>
+    <p class="problem-body reveal">
+      Work. Kids. Life admin. You keep putting yourself last — and every Monday you tell yourself this week will be different.<br/><br/>
+      <strong>You don't need a complete life overhaul.</strong> You need a structure that works around your actual life, and someone in your corner who won't let you make excuses.
+    </p>
+  </div>
+  <div class="pain-list">
+    <div class="pain-item"><span class="pain-dash">→</span> Running on empty — low energy every day</div>
+    <div class="pain-item"><span class="pain-dash">→</span> No consistent routine that actually sticks</div>
+    <div class="pain-item"><span class="pain-dash">→</span> Eating whatever's easiest, not what works</div>
+    <div class="pain-item"><span class="pain-dash">→</span> Training plan falls apart by week 2</div>
+    <div class="pain-item"><span class="pain-dash">→</span> "No time" — but deep down you know that's not it</div>
+    <div class="pain-item"><span class="pain-dash">→</span> Your kids are watching. You want to do better.</div>
+  </div>
+</div>
+
+<!-- ── COACH ──────────────────────────────── -->
+<div class="coach-section" id="coach">
+  <div class="section-label reveal">Meet Your Coach</div>
+  <div class="coach-grid">
+    <div class="coach-photo reveal">
+      <div class="coach-photo-icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <p class="coach-photo-hint">Replace with your photo<br/>Portrait · 3:4 ratio works best</p>
+      <div class="coach-photo-badge">Discipline Coach</div>
+    </div>
+    <div class="reveal">
       <div class="coach-name">Your<br/><span>Name</span><br/>Here</div>
       <p class="coach-bio">
-        Add your story here — why you started coaching, what drove you to build this, and why you specifically work with dads. <strong>People buy from people.</strong> Let them see who you are and why you give a damn.<br/><br/>
-        Keep it real. Keep it direct. No fluff.
+        This is where you tell your story — not your CV, your <em>why</em>. Why dads? What did you go through yourself? What made you realise that most fitness advice completely ignores the reality of dad life?<br/><br/>
+        <strong>People don't buy coaching. They buy trust.</strong> Be real here and they'll feel it.
       </p>
       <div class="coach-stats">
-        <div class="coach-stat">
-          <div class="coach-stat-num">5+</div>
-          <div class="coach-stat-label">Years Coaching</div>
+        <div class="cstat">
+          <div class="cstat-num">5+</div>
+          <div class="cstat-label">Years Coaching</div>
         </div>
-        <div class="coach-stat">
-          <div class="coach-stat-num">200+</div>
-          <div class="coach-stat-label">Dads Coached</div>
+        <div class="cstat">
+          <div class="cstat-num">200+</div>
+          <div class="cstat-label">Dads Transformed</div>
         </div>
-        <div class="coach-stat">
-          <div class="coach-stat-num">1:1</div>
-          <div class="coach-stat-label">Always Personal</div>
+        <div class="cstat">
+          <div class="cstat-num">1:1</div>
+          <div class="cstat-label">Always Personal</div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- FOR YOU -->
-<div class="for-you-section">
-  <div class="for-you-grid">
-    <div>
-      <div class="section-label reveal">Sound Familiar?</div>
-      <h2 class="reveal">You're <span class="orange">Busy.</span><br/>Not Broken.</h2>
-      <p class="for-you-body reveal">
-        Work. Kids. Life. You keep putting yourself last and wondering why you feel like a shadow of who you used to be.<br/><br/>
-        <strong>You don't need a complete overhaul.</strong> You need a structure that fits your actual life — and someone who keeps you honest.
-      </p>
-    </div>
-    <div class="pain-points">
-      <div class="pain-item"><span class="pain-num">—</span> Low energy & motivation</div>
-      <div class="pain-item"><span class="pain-num">—</span> No consistent routine</div>
-      <div class="pain-item"><span class="pain-num">—</span> Poor nutrition habits</div>
-      <div class="pain-item"><span class="pain-num">—</span> Training falls apart after week 2</div>
-      <div class="pain-item"><span class="pain-num">—</span> No time — or so you think</div>
-      <div class="pain-item"><span class="pain-num">—</span> Want to set an example for your kids</div>
-    </div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<div class="how">
+<!-- ── PROCESS ───────────────────────────── -->
+<div class="process-section" id="process">
   <div class="section-label reveal">The Process</div>
-  <h2 class="reveal">How It <span class="orange">Works</span></h2>
+  <h2 class="reveal">Four Steps.<br/><span class="accent">Real Results.</span></h2>
   <div class="steps-grid">
     <div class="step-card">
-      <div class="step-big-num">01</div>
-      <div class="step-title">Strategy Call</div>
-      <p class="step-desc">We map your goals, lifestyle, training, and nutrition honestly. No judgement. Just clarity on where you are and where you want to be.</p>
+      <div class="step-ghost">01</div>
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Free Strategy Call</div>
+      <p class="step-desc">No pitch. We talk honestly about your goals, lifestyle, training history, and what's actually gotten in the way. 30 minutes that changes everything.</p>
     </div>
     <div class="step-card">
-      <div class="step-big-num">02</div>
-      <div class="step-title">Your Structure</div>
-      <p class="step-desc">I build a plan around your actual life — calorie targets, simple training, one non-negotiable daily habit. Sustainable, not extreme.</p>
+      <div class="step-ghost">02</div>
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Your Custom Structure</div>
+      <p class="step-desc">I build your plan around your actual life — realistic calorie targets, a training structure you can execute, and one non-negotiable daily habit.</p>
     </div>
     <div class="step-card">
-      <div class="step-big-num">03</div>
-      <div class="step-title">Daily Check-ins</div>
-      <p class="step-desc">You send food photos daily. I give real feedback. Direct access to me — no bots, no templates. Accountability that actually holds.</p>
+      <div class="step-ghost">03</div>
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Daily Accountability</div>
+      <p class="step-desc">Food photos daily. Direct access to me. Real feedback — not an app, not a bot. This is where the habit gets built, one day at a time.</p>
     </div>
     <div class="step-card">
-      <div class="step-big-num">04</div>
+      <div class="step-ghost">04</div>
+      <div class="step-num">Step 04</div>
       <div class="step-title">Weekly Reviews</div>
-      <p class="step-desc">We track progress, adjust the plan, and keep momentum building. When life gets hard — and it will — you won't be doing it alone.</p>
+      <p class="step-desc">We check progress, adjust the structure, and keep building momentum. When motivation drops — and it will — I'm there. That's the point.</p>
     </div>
   </div>
 </div>
 
-<!-- INCLUDED -->
-<div class="included-section">
-  <div class="section-label reveal">What's Included</div>
-  <h2 class="reveal">Everything You <span class="orange">Need.</span><br/>Nothing You Don't.</h2>
-  <div class="included-grid">
-    <ul class="included-list">
-      <li><span class="check">✓</span> Daily accountability check-ins</li>
-      <li><span class="check">✓</span> Direct access to your coach</li>
-      <li><span class="check">✓</span> One non-negotiable daily habit</li>
-      <li><span class="check">✓</span> Nutrition guidance that fits dad life</li>
-      <li><span class="check">✓</span> Calorie & protein targets</li>
-      <li><span class="check">✓</span> Simple training structure</li>
-      <li><span class="check">✓</span> Weekly progress check-ins</li>
-      <li><span class="check">✓</span> Daily food photo feedback</li>
-      <li><span class="check">✓</span> Support when motivation drops</li>
-    </ul>
-    <div class="reveal">
-      <div class="quote-block">
-        <p class="quote-text">"The goal isn't perfection. The goal is building momentum and becoming someone disciplined long term."</p>
-        <p class="quote-sub">— Your Coach</p>
+<!-- ── TESTIMONIALS ──────────────────────── -->
+<div class="testimonials-section" id="proof">
+  <div class="section-label reveal">Real Dads. Real Results.</div>
+  <h2 class="reveal">Don't Take<br/><span class="accent">My Word For It.</span></h2>
+  <div class="testimonials-grid">
+    <div class="tcard">
+      <div class="tcard-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="tcard-quote">I've tried every programme going. This is the first time anything has actually stuck. Having someone check in daily makes it impossible to keep lying to yourself.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">JR</div>
+        <div>
+          <div class="tcard-name">James R.</div>
+          <div class="tcard-meta">Dad of 2 · Lost 14kg in 4 months</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="tcard-quote">I was sceptical — I thought I was too busy. Turns out I just didn't have the right structure. Three months in and I train 4 days a week without it affecting family time.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">DM</div>
+        <div>
+          <div class="tcard-name">Dan M.</div>
+          <div class="tcard-meta">Dad of 3 · 8 months in, still going</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="tcard-quote">My energy is completely different. I'm more present with my kids and I actually feel like myself again. Worth every penny — I just wish I'd done it sooner.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">KT</div>
+        <div>
+          <div class="tcard-name">Karl T.</div>
+          <div class="tcard-meta">Dad of 1 · Down 2 shirt sizes</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CTA -->
-<div class="cta-section" id="book">
-  <div class="cta-inner">
-    <div class="section-label" style="color: rgba(237,232,224,0.7);">Ready? Let's Go.</div>
-    <h2>Book Your<br/>Free Call</h2>
-    <p class="cta-body">
-      We jump on a call, map it all out, and figure out if we're a fit. No pressure. No pitch. Just a straight conversation about what it's going to take.
-    </p>
-    <a href="https://cal.com" target="_blank" class="btn-dark">Book Free Strategy Call →</a>
-    <p class="cta-footnote">Free · 30 minutes · No commitment required</p>
+<!-- ── WHAT'S INCLUDED ───────────────────── -->
+<div class="included-section">
+  <div class="section-label reveal">What You Get</div>
+  <h2 class="reveal">Built For Dad<br/><span class="accent">Life. Not Gym Bros.</span></h2>
+  <div class="included-grid">
+    <ul class="included-list">
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Daily Accountability Check-ins</div><div class="li-sub">I hold you to it — every single day, not just when it's convenient.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Direct Access to Your Coach</div><div class="li-sub">Real person, real responses. No automated messages, ever.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">One Non-Negotiable Daily Habit</div><div class="li-sub">The single most important thing — done every day, no matter what.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Nutrition Guidance That Fits Dad Life</div><div class="li-sub">No meal prep obsession. Practical, sustainable targets you can actually hit.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Calorie &amp; Protein Targets</div><div class="li-sub">Numbers dialled to you — not a generic template.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Simple Training Structure</div><div class="li-sub">Fits around your schedule. No 2-hour sessions required.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Weekly Progress Check-ins</div><div class="li-sub">Review what worked, fix what didn't, keep moving forward.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Daily Food Photo Feedback</div><div class="li-sub">Build awareness and consistency — no calorie-counting apps needed.</div></div>
+      </li>
+      <li>
+        <span class="check-box">✓</span>
+        <div><div class="li-title">Support When Motivation Drops</div><div class="li-sub">Because it will. And that's exactly when having a coach matters most.</div></div>
+      </li>
+    </ul>
+
+    <div class="included-aside">
+      <div class="quote-block reveal">
+        <p class="quote-text">"The goal isn't perfection. The goal is building momentum — and becoming someone who shows up even when they don't feel like it."</p>
+        <p class="quote-attribution">— Your Coach</p>
+      </div>
+      <div class="mid-cta-card reveal">
+        <h3>Spots Are<br/>Limited</h3>
+        <p>I only take on a small number of new clients at a time so I can give every dad proper attention. If you're serious, don't wait.</p>
+        <a href="#book" class="btn-small-dark">Claim Your Spot →</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ── FAQ ────────────────────────────────── -->
+<div class="faq-section" id="faq">
+  <div class="section-label reveal">Common Questions</div>
+  <h2 class="reveal">You've Got<br/><span class="accent">Questions.</span></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">I'm really busy — will I have time for this?<span class="faq-icon">+</span></div>
+      <div class="faq-a">The whole point is that we build around your actual schedule, not some ideal version of it. Most dads I work with have less than 45 minutes a day. That's enough. What you don't have time for is to keep going as you are.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is this different from a normal PT?<span class="faq-icon">+</span></div>
+      <div class="faq-a">A PT sees you for an hour once or twice a week. I'm in your corner every single day. The daily check-ins, food photo feedback, and direct messaging is what actually builds the habits — not a 60-minute session.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">I've tried plans before and failed. Why will this work?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Because most plans fail for the same reason — no accountability and no structure built around real life. We fix both. The first call is about understanding exactly why things haven't stuck before so we don't repeat the same mistakes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I need a gym membership?<span class="faq-icon">+</span></div>
+      <div class="faq-a">No. We work with whatever you have — gym, home setup, or both. The training structure adapts to your situation, not the other way around.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What happens on the free call?<span class="faq-icon">+</span></div>
+      <div class="faq-a">30 minutes. We talk about where you are, what you've tried, what's gotten in the way, and what you actually want. No sales pressure. By the end you'll know exactly whether this is right for you — and if it's not, I'll tell you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much does it cost?<span class="faq-icon">+</span></div>
+      <div class="faq-a">We talk through options on the call based on your goals and situation. Investment varies depending on the level of support you need. The free call is always free — no strings attached.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FINAL CTA ──────────────────────────── -->
+<div class="cta-section" id="book">
+  <div class="cta-bg-word">GO</div>
+  <div class="cta-inner">
+    <div class="section-label reveal" style="color:rgba(237,232,224,.6);">One Call Changes Everything</div>
+    <h2 class="reveal">
+      <span class="accent">Stop</span><br/>Waiting.<br/>Start Now.
+    </h2>
+    <p class="cta-body reveal">
+      30 minutes. No pitch. No pressure. Just an honest conversation about where you are and what it's going to take. If we're a fit, great. If not, you'll still walk away with clarity.
+    </p>
+    <div class="objection-row reveal">
+      <div class="objection-chip"><span class="dot">✓</span> Free · No cost</div>
+      <div class="objection-chip"><span class="dot">✓</span> 30 minutes</div>
+      <div class="objection-chip"><span class="dot">✓</span> Zero commitment</div>
+      <div class="objection-chip"><span class="dot">✓</span> No hard sell</div>
+    </div>
+    <div class="reveal">
+      <a href="https://cal.com" target="_blank" class="btn-orange">Book Your Free Strategy Call →</a>
+    </div>
+    <p class="cta-footnote reveal">Limited spots available each month</p>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────── -->
 <footer>
-  <div class="footer-logo">DISCIPLINE<span>.</span></div>
-  <div class="footer-copy">© 2026 · All rights reserved</div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">DISCIPLINE<span>.</span></div>
+      <p class="footer-tagline">1-on-1 coaching for dads who are done making excuses.</p>
+    </div>
+    <div class="footer-cta-block">
+      <p class="footer-cta-label">Ready to start?</p>
+      <a href="#book" class="btn-orange" style="font-size:1.1rem; padding:13px 28px;">Book Free Call →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Discipline Coaching · All rights reserved</p>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#book">Contact</a></li>
+    </ul>
+  </div>
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
+// Intersection observer for all .reveal elements
+const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-const painObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.pain-item').forEach((el, i) => {
-        setTimeout(() => el.classList.add('visible'), i * 100);
-      });
-      painObserver.disconnect();
-    }
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
   });
 }, { threshold: 0.1 });
-const painEl = document.querySelector('.pain-points');
-if (painEl) painObserver.observe(painEl);
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-const stepObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.step-card').forEach((el, i) => {
-        setTimeout(() => el.classList.add('visible'), i * 120);
-      });
-      stepObserver.disconnect();
-    }
-  });
+// Stagger: proof bar items
+const proofObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.proof-item').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 100);
+    });
+    proofObs.disconnect();
+  }
+}, { threshold: 0.2 });
+const proofBar = document.querySelector('.proof-bar');
+if (proofBar) proofObs.observe(proofBar);
+
+// Stagger: pain items
+const painObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.pain-item').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 90);
+    });
+    painObs.disconnect();
+  }
+}, { threshold: 0.1 });
+const painEl = document.querySelector('.pain-list');
+if (painEl) painObs.observe(painEl);
+
+// Stagger: step cards
+const stepObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.step-card').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 110);
+    });
+    stepObs.disconnect();
+  }
 }, { threshold: 0.1 });
 const stepsEl = document.querySelector('.steps-grid');
-if (stepsEl) stepObserver.observe(stepsEl);
+if (stepsEl) stepObs.observe(stepsEl);
 
-const listObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.included-list li').forEach((el, i) => {
-        setTimeout(() => el.classList.add('visible'), i * 80);
-      });
-      listObserver.disconnect();
-    }
-  });
+// Stagger: testimonial cards
+const tObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.tcard').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 120);
+    });
+    tObs.disconnect();
+  }
 }, { threshold: 0.1 });
+const tGrid = document.querySelector('.testimonials-grid');
+if (tGrid) tObs.observe(tGrid);
+
+// Stagger: included list
+const listObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.included-list li').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 70);
+    });
+    listObs.disconnect();
+  }
+}, { threshold: 0.05 });
 const listEl = document.querySelector('.included-list');
-if (listEl) listObserver.observe(listEl);
+if (listEl) listObs.observe(listEl);
+
+// Stagger: FAQ items
+const faqObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.faq-item').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+    faqObs.disconnect();
+  }
+}, { threshold: 0.05 });
+const faqGrid = document.querySelector('.faq-grid');
+if (faqGrid) faqObs.observe(faqGrid);
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Nav compact on scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('compact', window.scrollY > 60);
+}, { passive: true });
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
 </script>
 </body>
 </html>
